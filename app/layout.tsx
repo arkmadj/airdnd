@@ -2,7 +2,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/navbar/ClientOnly";
-import Modal from "./components/modals/Modal";
+import RegisterModal from "./components/modals/RegisterModal";
 
 export const metadata = {
 	title: "Airdnd",
@@ -22,7 +22,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={nunito.className}>
 				<ClientOnly>
-          <Modal actionLabel="Submit" isOpen title="Hello World!"/>
+					<RegisterModal/>
 					<Navbar />
 				</ClientOnly>
 				{children}
