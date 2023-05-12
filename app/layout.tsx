@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/navbar/ClientOnly";
 import RegisterModal from "./components/modals/RegisterModal";
+import ToasterProvider from "./providers/ToasterProvider";
 
 export const metadata = {
 	title: "Airdnd",
@@ -22,6 +23,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={nunito.className}>
 				<ClientOnly>
+					<ToasterProvider/>
 					<RegisterModal/>
 					<Navbar />
 				</ClientOnly>
