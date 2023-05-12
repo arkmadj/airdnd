@@ -14,7 +14,7 @@ interface ModalProps {
 	actionLabel: string;
 	disabled?: boolean;
 	secondaryAction?: () => void;
-	secondaryLabel?: string;
+	secondaryActionLabel?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({
 	actionLabel,
 	disabled,
 	secondaryAction,
-	secondaryLabel,
+	secondaryActionLabel,
 }) => {
 	const [showModal, setShowModal] = useState(isOpen);
 
@@ -72,16 +72,10 @@ const Modal: React.FC<ModalProps> = ({
 				<div className="relative w-full h-full mx-auto my-6 md:w-4/6 lg:w-3/6 xl:w-2/5 lg:h-auto md:h-auto">
 					<div
 						className={`translate duration-300 h-full ${
-							showModal
-								? "translate-y-0"
-								: "translate-y-full"
+							showModal ? "translate-y-0" : "translate-y-full"
 						}
             
-            ${
-							showModal
-								? "opacity-100"
-								: "opacity-0"
-						}`}
+            ${showModal ? "opacity-100" : "opacity-0"}`}
 					>
 						<div className="relative flex flex-col w-full h-full bg-white border-0 rounded-lg shadow-lg outline-none translate lg:h-auto md:h-auto focus:outline-none">
 							<div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
@@ -94,11 +88,24 @@ const Modal: React.FC<ModalProps> = ({
 								<div className="text-lg font-semibold">{title}</div>
 							</div>
 							<div className="relative flex-auto p-6">{body}</div>
-              <div className="flex flex-col gap-6 p-6">
-                <div className="flex flex-row items-center w-full gap-4">
-                  <Button label="My Button"/>
-                </div>
-                {footer}</div>
+							<div className="flex flex-col gap-6 p-6">
+								<div className="flex flex-row items-center w-full gap-4">
+									{secondaryAction && secondaryActionLabel && (
+										<Button
+											outline
+											disabled={disabled}
+											label={secondaryActionLabel}
+											onClick={handleSecondaryAction}
+										/>
+									)}
+									<Button
+										disabled={disabled}
+										label={actionLabel}
+										onClick={handleSubmit}
+									/>
+								</div>
+								{footer}
+							</div>
 						</div>
 					</div>
 				</div>
