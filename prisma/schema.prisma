@@ -13,15 +13,17 @@ datasource db {
 model AirUser {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   name           String
-  image          String?
   email          String?   @unique
   emailVerified  DateTime?
+  image          String?
   hashedPassword String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-  sessions       AirSession[]
-  accounts       AirAccount[]
   favoriteIds    String[]  @db.ObjectId
+
+  accounts     AirAccount[]
+  listings     AirListing[]
+  reservations AirReservation[]
 }
 
 model AirAccount {
@@ -43,10 +45,27 @@ model AirAccount {
   @@unique([provider, providerAccountId])
 }
 
-model AirSession {
+model AirListing {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String
+  imageSrc String
+  createdAt DateTime @default(now())
+  category String
+  roomCount Int
+  bathrommCount Int
+  guestCount Int
+  locationValue String
+  userId String @db.ObjectId
+  price Int
+
+  user AirUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AirReservation {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
   userId       String   @db.ObjectId
   expires      DateTime
-  user         AirUser     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         AirUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
