@@ -46,26 +46,32 @@ model AirAccount {
 }
 
 model AirListing {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  title String
-  description String
-  imageSrc String
-  createdAt DateTime @default(now())
-  category String
-  roomCount Int
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  description   String
+  imageSrc      String
+  createdAt     DateTime @default(now())
+  category      String
+  roomCount     Int
   bathrommCount Int
-  guestCount Int
+  guestCount    Int
   locationValue String
-  userId String @db.ObjectId
-  price Int
+  userId        String   @db.ObjectId
+  price         Int
 
-  user AirUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         AirUser          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations AirReservation[]
 }
 
 model AirReservation {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String   @unique
-  userId       String   @db.ObjectId
-  expires      DateTime
-  user         AirUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  listingId  String   @db.ObjectId
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Int
+  createAt   DateTime @default(now())
+
+  user    AirUser    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing AirListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
