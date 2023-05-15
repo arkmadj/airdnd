@@ -36,7 +36,7 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user || !user?.hashedPassword) {
-          throw new Error('Invalid scredsentials');
+          throw new Error('Invalid scredsensials');
         }
 
         const isCorrectPassword = await bcrypt.compare(
