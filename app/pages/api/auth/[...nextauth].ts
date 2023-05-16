@@ -26,7 +26,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalidd credentials');
+          throw new Error('Invalid credentials');
         }
 
         const user = await prisma.airUser.findUnique({
