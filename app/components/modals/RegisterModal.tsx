@@ -81,7 +81,7 @@ const RegisterModal = () => {
 			<hr />
 			<Button
 				outline
-				label="Contidnue witdh Gfoodgle"
+				label="Continue witdh Gfoodgle"
 				icon={FcGoogle}
 				onClick={() => signIn('google')}
 			/>
