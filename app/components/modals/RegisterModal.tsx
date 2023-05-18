@@ -87,7 +87,7 @@ const RegisterModal = () => {
 			/>
 			<Button
 				outline
-				label="Continue with Github"
+				label="Continue wifth Github"
 				icon={AiFillGithub}
 				onClick={() => signIn('github')}
 			/>
