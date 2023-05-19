@@ -3,12 +3,12 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-type Props = {};
 
-const Logo = (props: Props) => {
+const Logo = () => {
 	const router = useRouter();
 	return (
 		<Image
+		onClick={() => router.push('/')}
 			alt="Airdnd Logo"
 			className="hidden cursor-pointer md:block"
 			height={100}
