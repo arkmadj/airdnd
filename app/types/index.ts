@@ -1,7 +1,7 @@
-import { AirUser } from "@prisma/client";
+import { User } from "@prisma/client";
 
 export type SafeUser = Omit<
-	AirUser,
+	User,
 	"createdAt" | "updatedAt" | "emailVerified"
 > & {
 	createdAt: string;
