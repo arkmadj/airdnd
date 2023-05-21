@@ -140,21 +140,32 @@ const RentModal = () => {
 					title="Guests"
 					subtitle="How many guests do you allow?"
 					value={guestCount}
-					onChange={(value) => setCustomValue('guestCount', value)}
+					onChange={(value) => setCustomValue("guestCount", value)}
 				/>
-				<hr/>
+				<hr />
 				<Counter
 					title="Rooms"
 					subtitle="How many rooms do you have?"
 					value={roomCount}
-					onChange={(value) => setCustomValue('roomCount', value)}
+					onChange={(value) => setCustomValue("roomCount", value)}
 				/>
-				<hr/>
+				<hr />
 				<Counter
 					title="Bathrooms"
 					subtitle="How many bathrooms do you have?"
 					value={bathroomCount}
-					onChange={(value) => setCustomValue('bathroomCount', value)}
+					onChange={(value) => setCustomValue("bathroomCount", value)}
+				/>
+			</div>
+		);
+	}
+
+	if (step === STEPS.IMAGES) {
+		bodyContent = (
+			<div className="flex flex-col gap-8">
+				<Heading
+					title="Add a photo of your place"
+					subtitle="Show guests what your place looks like"
 				/>
 			</div>
 		);
