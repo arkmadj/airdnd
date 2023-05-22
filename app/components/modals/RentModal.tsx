@@ -169,7 +169,21 @@ const RentModal = () => {
 					title="Add a photo of your place"
 					subtitle="Show guests what your place looks like"
 				/>
-				<ImageUpload value={imageSrc} onChange={(value) => setCustomValue("imageSrc", value)}/>
+				<ImageUpload
+					value={imageSrc}
+					onChange={(value) => setCustomValue("imageSrc", value)}
+				/>
+			</div>
+		);
+	}
+
+	if (step === STEPS.DESCRIPTION) {
+		bodyContent = (
+			<div className="flex flex-col gap-8">
+				<Heading
+					title="How would you describe your place?"
+					subtitle="Short and sweet works best"
+				/>
 			</div>
 		);
 	}
