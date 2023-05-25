@@ -2,6 +2,16 @@ import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 
 export default function Home() {
+
+  const isEmpty = true;
+
+  if(isEmpty){
+    return (
+      <ClientOnly>
+        <EmptyState/>
+      </ClientOnly>
+    )
+  }
 	return (
 		<ClientOnly>
 			<Container>
