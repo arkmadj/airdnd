@@ -1,12 +1,12 @@
+import getListings from "./actions/getListings";
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 
-export default function Home() {
+export default async function Home() {
+  const listings = await getListings()
 
-  const isEmpty = true;
-
-  if(isEmpty){
+  if(listings.length === 0){
     return (
       <ClientOnly>
         <EmptyState showReset/>
@@ -17,7 +17,13 @@ export default function Home() {
 		<ClientOnly>
 			<Container>
 				<div className="grid grid-cols-1 gap-8 pt-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-          <div>My future listings</div>
+          {
+            listings.map((listing: any) => {
+              return (
+                <ListingCard/>
+              )
+            })
+          }
         </div>
 			</Container>
 		</ClientOnly>
