@@ -1,7 +1,8 @@
+import Container from "@/app/components/Container";
+import ListingHead from "@/app/components/listings/ListingHead";
 import { catergories } from "@/app/components/navbar/Categories";
 import { SafeListing, SafeUser } from "@/app/types";
 import { Reservation } from "@prisma/client";
-import { Container } from "postcss";
 import { useMemo } from "react";
 
 interface ListingClientProps {
