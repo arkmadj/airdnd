@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 
 interface IParams {
 	listingId?: string;
-	userId: string;
-	authorId: string;
+	userId?: string;
+	authorId?: string;
 }
 
 export default async function getReservations(params: IParams) {
