@@ -1,6 +1,8 @@
+'use client'
+
 const ListingReservation = () => {
   return ( 
-    <div>Listing Reservation</div>
+    <div>Listing Reservat</div>
    );
 }
  
