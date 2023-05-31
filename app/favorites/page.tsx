@@ -2,7 +2,7 @@ import EmptyState from "../components/EmptyState";
 import ClientOnly from "../components/ClientOnly";
 import getCurrentUser from "../actions/getCurrentUser";
 
-const FavoritePage = async () => {
+const FavoritesPage = async () => {
 	return (
 		<ClientOnly>
 			<EmptyState
@@ -13,4 +13,4 @@ const FavoritePage = async () => {
 	);
 };
 
-export default FavoritePage;
+export default FavoritesPage;
