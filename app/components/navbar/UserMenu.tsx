@@ -16,7 +16,7 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
-	const router = useRouter()
+	const router = useRouter();
 	const registerModal = useRegisterModal();
 	const rentModal = useRentModal();
 	const loginModal = useLoginModal();
@@ -27,12 +27,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 	}, []);
 
 	const onRent = useCallback(() => {
-		if(!currentUser){
-			return loginModal.onOpen()
+		if (!currentUser) {
+			return loginModal.onOpen();
 		}
 
-		rentModal.onOpen()
-	}, [currentUser, loginModal, rentModal])
+		rentModal.onOpen();
+	}, [currentUser, loginModal, rentModal]);
 
 	return (
 		<div className="relative">
@@ -49,7 +49,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 				>
 					<AiOutlineMenu />
 					<div className="hidden md:block">
-						<Avatar src={currentUser?.image}/>
+						<Avatar src={currentUser?.image} />
 					</div>
 				</div>
 			</div>
@@ -58,8 +58,14 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 					<div className="flex flex-col cursor-pointer">
 						{currentUser ? (
 							<>
-								<MenuItem onClick={() => router.push('/trips')} label="My trips" />
-								<MenuItem onClick={() => {}} label="My favorites" />
+								<MenuItem
+									onClick={() => router.push("/trips")}
+									label="My trips"
+								/>
+								<MenuItem
+									onClick={() => router.push("/reservations")}
+									label="My favorites"
+								/>
 								<MenuItem onClick={() => {}} label="My reservations" />
 								<MenuItem onClick={() => {}} label="My properties" />
 								<MenuItem onClick={rentModal.onOpen} label="Airdnd my home" />
