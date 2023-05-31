@@ -1,9 +1,17 @@
-'use client'
+"use client";
 
-const FavoritesClient = () => {
-  return ( 
-    <div>Favorites Client</div>
-   );
+import { SafeListing, SafeUser } from "../types";
+
+interface FavoriteClientProps {
+	listings: SafeListing[];
+	currentUser: SafeUser | null;
 }
- 
+
+const FavoritesClient: React.FC<FavoriteClientProps> = ({
+	listings,
+	currentUser,
+}) => {
+	return <div>Favorites Client</div>;
+};
+
 export default FavoritesClient;
