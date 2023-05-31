@@ -4,7 +4,9 @@ import { useRouter } from "next/navigation";
 import Container from "../components/Container";
 import Heading from "../components/Heading";
 import { SafeReservations, SafeUser } from "../types";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 interface ReservationsClientProps {
 	reservations: SafeReservations[];
@@ -15,9 +17,26 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
 	reservations,
 	currentUser,
 }) => {
-  const router = useRouter();
-  const [deletingId, seDeletingId] = useState('')
- 
+	const router = useRouter();
+	const [deletingId, setDeletingId] = useState("");
+
+	const onCancel = useCallback((id: string) => {
+		setDeletingId(id);
+
+		axios
+			.delete(`/api/reservations/${id}`)
+			.then(() => {
+				toast.success("Reservation cancelled");
+				router.refresh();
+			})
+			.catch((error) => {
+				toast.error("Something went wrong.");
+			})
+			.finally(() => {
+				setDeletingId("");
+			});
+	}, [router]);
+
 	return (
 		<Container>
 			<Heading title="Reservations" subtitle="Bookings on your properties" />
