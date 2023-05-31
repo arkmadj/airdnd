@@ -35,4 +35,4 @@ const TripsPage = async () => {
    );
 }
  
-export default ;
+export default TripsPage;
