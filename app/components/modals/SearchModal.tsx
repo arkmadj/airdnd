@@ -8,6 +8,8 @@ import { useCallback, useMemo, useState } from "react";
 import { Range } from "react-date-range";
 import dynamic from "next/dynamic";
 import { CountrySelectValue } from "../inputs/CountrySelect";
+import qs from "query-string";
+import { formatISO } from "date-fns";
 
 enum STEPS {
 	LOCATION = 0,
@@ -20,7 +22,7 @@ const SearchModal = () => {
 	const params = useSearchParams();
 	const searchModal = useSearchModal();
 
-  const [location, useLocation] = useState<CountrySelectValue>()
+	const [location, useLocation] = useState<CountrySelectValue>();
 	const [step, setStep] = useState(STEPS.LOCATION);
 	const [guestCount, setGuestCount] = useState(1);
 	const [roomCount, setRoomCount] = useState(1);
@@ -31,13 +33,73 @@ const SearchModal = () => {
 		key: "selection",
 	});
 
-  const Map = useMemo(() => dynamic(() => import('../Map'), {
-    ssr: false,
-  }), [location])
+	const Map = useMemo(
+		() =>
+			dynamic(() => import("../Map"), {
+				ssr: false,
+			}),
+		[location]
+	);
 
-  const onBack = useCallback(() => {
-    setStep((value) => value - 1)
-  }, [])
+	const onBack = useCallback(() => {
+		setStep((value) => value - 1);
+	}, []);
+
+	const onNext = useCallback(() => {
+		setStep((value) => value + 1);
+	}, []);
+
+	const onSubmit = useCallback(async () => {
+		if (step !== STEPS.INFO) {
+			return onNext();
+		}
+
+		let currentQuery = {};
+
+		if (params) {
+			currentQuery = qs.parse(params.toString());
+		}
+
+		const updatedQuery: any = {
+			...currentQuery,
+			locationValue: location?.value,
+			guestCount,
+			roomCount,
+			bathroomCount,
+		};
+
+		if (dateRange.startDate) {
+			updatedQuery.startDate = formatISO(dateRange.startDate);
+		}
+
+		if (dateRange.endDate) {
+			updatedQuery.endDate = formatISO(dateRange.endDate);
+		}
+
+		const url = qs.stringifyUrl(
+			{
+				url: "/",
+				query: updatedQuery,
+			},
+			{ skipNull: true }
+		);
+
+		setStep(STEPS.LOCATION);
+		searchModal.onClose();
+
+		router.push(url);
+	}, [
+		step,
+		params,
+		location?.value,
+		guestCount,
+		roomCount,
+		bathroomCount,
+		dateRange,
+		searchModal,
+		router,
+		onNext,
+	]);
 
 	return (
 		<Modal
