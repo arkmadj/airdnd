@@ -17,7 +17,7 @@ export async function DELETE(request: Request, {params} : {params: IParams}){
   const {listingId} = params;
 
   if(!listingId || typeof listingId !== 'string'){
-    throw new Error("Inswsvealid IsDs")
+    throw new Error("Inswsvealid IDs")
   }
 
   const listing = await prisma.listing.deleteMany({
